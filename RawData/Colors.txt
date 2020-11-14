@@ -2,6 +2,94 @@ Colors
 
 usb.src == "host" && usb.transfer_type !="URB_INTERRUPT"
 
+(COLOR)
+Frame 1811: 56 bytes on wire (448 bits), 56 bytes captured (448 bits) on interface wireshark_extcap4056, id 0
+    Interface id: 0 (wireshark_extcap4056)
+    Encapsulation type: USB packets with USBPcap header (152)
+    Arrival Time: Nov 11, 2020 10:54:39.557146000 GMT
+    [Time shift for this packet: 0.000000000 seconds]
+    Epoch Time: 1605092079.557146000 seconds
+    [Time delta from previous captured frame: 0.000095000 seconds]
+    [Time delta from previous displayed frame: 0.002110000 seconds]
+    [Time since reference or first frame: 5.801047000 seconds]
+    Frame Number: 1811
+    Frame Length: 56 bytes (448 bits)
+    Capture Length: 56 bytes (448 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: usb:usbhid]
+USB URB
+    [Source: host]
+    [Destination: 4.1.0]
+    USBPcap pseudoheader length: 28
+    IRP ID: 0xffff9a034888d690
+    IRP USBD_STATUS: USBD_STATUS_SUCCESS (0x00000000)
+    URB Function: URB_FUNCTION_CLASS_INTERFACE (0x001b)
+    IRP information: 0x00, Direction: FDO -> PDO
+    URB bus id: 4
+    Device address: 1
+    Endpoint: 0x00, Direction: OUT
+    URB transfer type: URB_CONTROL (0x02)
+    Packet Data Length: 28
+    [Response in: 1812]
+    Control transfer stage: Setup (0)
+    [bInterfaceClass: HID (0x03)]
+Setup Data
+    bmRequestType: 0x21
+    bRequest: SET_REPORT (0x09)
+    wValue: 0x0211
+    wIndex: 1
+    wLength: 20
+    bRequest: 9
+    wValue: 0x0211
+    wIndex: 1 (0x0001)
+    wLength: 20
+    Data Fragment: 11ff0e3e000100ffff0200000000000000000000
+
+(SYNC)
+Frame 1439: 43 bytes on wire (344 bits), 43 bytes captured (344 bits) on interface wireshark_extcap2660, id 0
+    Interface id: 0 (wireshark_extcap2660)
+    Encapsulation type: USB packets with USBPcap header (152)
+    Arrival Time: Nov 11, 2020 10:56:35.322843000 GMT
+    [Time shift for this packet: 0.000000000 seconds]
+    Epoch Time: 1605092195.322843000 seconds
+    [Time delta from previous captured frame: 0.018356000 seconds]
+    [Time delta from previous displayed frame: 5.599243000 seconds]
+    [Time since reference or first frame: 5.599243000 seconds]
+    Frame Number: 1439
+    Frame Length: 43 bytes (344 bits)
+    Capture Length: 43 bytes (344 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: usb:usbhid]
+USB URB
+    [Source: host]
+    [Destination: 4.1.0]
+    USBPcap pseudoheader length: 28
+    IRP ID: 0xffff9a034a0a8990
+    IRP USBD_STATUS: USBD_STATUS_SUCCESS (0x00000000)
+    URB Function: URB_FUNCTION_CLASS_INTERFACE (0x001b)
+    IRP information: 0x00, Direction: FDO -> PDO
+    URB bus id: 4
+    Device address: 1
+    Endpoint: 0x00, Direction: OUT
+    URB transfer type: URB_CONTROL (0x02)
+    Packet Data Length: 15
+    [Response in: 1440]
+    Control transfer stage: Setup (0)
+    [bInterfaceClass: HID (0x03)]
+Setup Data
+    bmRequestType: 0x21
+    bRequest: SET_REPORT (0x09)
+    wValue: 0x0210
+    wIndex: 1
+    wLength: 7
+    bRequest: 9
+    wValue: 0x0210
+    wIndex: 1 (0x0001)
+    wLength: 7
+    Data Fragment: 10ff0d2e010000
+
 #################### BREATHING #################### 
 (SYNC) 
 Frame - 
