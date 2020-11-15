@@ -56,6 +56,7 @@ int handlerUSB()
 	libusb_device **devs = 0;
   libusb_device *deviceLogitech = 0;
   libusb_device_handle *retHandle = 0;
+  struct libusb_config_descriptor *dConfig ;
   ssize_t cnt = libusb_get_device_list(NULL, &devs);
 	if (cnt < 0){
 		libusb_exit(NULL);
@@ -86,6 +87,15 @@ int handlerUSB()
     } else {
         printf("Auto detach kernel mode set.\n");
     }
+  retVal = libusb_get_active_config_descriptor(deviceLogitech, &dConfig);
+  if(retVal<0)
+  {
+    fprintf(stderr, "Could not get configuration descriptor: %s.\n", libusb_error_name(retVal));
+    libusb_close(retHandle);
+  }
+  printf("Got configuration descriptor \n");
+
+
 
 }
 
