@@ -78,7 +78,14 @@ int handlerUSB()
     fprintf(stderr, "Could not open inquired device");
     return FAIL_USB;
   }
-
+  printf("Inquired device open \n");
+  retVal = libusb_set_auto_detach_kernel_driver(retHandle,1);
+    if (retVal < 0) {
+        fprintf(stderr, "Could not set auto detach kernel mode: %s\n",
+                libusb_error_name(retVal));
+    } else {
+        printf("Auto detach kernel mode set.\n");
+    }
 
 }
 
