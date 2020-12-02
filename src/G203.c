@@ -3,6 +3,10 @@
 #include <ctype.h>
 #include "libusb-1.0/libusb.h"
 #define FAIL_USB -100
+#define URB_MESSAGE_LENGTH 28
+#define SETUP_CONFIG_MESSAGE_LENGTH 8
+#define SETUP_SYNC_MESSAGE_LENGTH 15
+#define SETUP_COLORS_MESSAGE_LENGTH 28
 #define MAX_NUM_COLORS 4
 #define MAX_NUM_SCALARS 4
 
@@ -21,6 +25,7 @@ typedef struct {
     int scalars[MAX_NUM_SCALARS];
 } Arguments;
 
+uint8_t MESSAGE_SET_CONFIGURATION[URB_MESSAGE_LENGTH] = {};
 const uint16_t logitech_vendor_id = 0x046d;
 const uint16_t logitech_device_g203 = 0xc084;
 static void print_devs(libusb_device **devs)
@@ -52,13 +57,13 @@ static void print_devs(libusb_device **devs)
 }
 
 int
-controlTransfer(libusb_device_handle *pHandle, unsigned char *sData, uint16_t wLength) {
+controlTransfer(libusb_device_handle *pHandle, uint32_t wValue, unsigned char *sData, uint16_t wLength) {
     int retVal = libusb_control_transfer(
         pHandle,
-        0x21 /* bmRequestType */,
-        9 /* bRequest */,
-        0x0210 /* wValue */,
-        1 /* wIndex */,
+        LIBUSB_REQUEST_TYPE_CLASS|LIBUSB_RECIPIENT_INTERFACE|LIBUSB_ENDPOINT_OUT /* 0x21 bmRequestType */,
+        0x09 /* bRequest */,
+        wValue /* wValue */,
+        0x0001 /* wIndex */,
         sData,
         wLength,
         0 /* standard device timeout */
@@ -189,7 +194,29 @@ handlerUSB()
     return retVal;
   }
   printf("Claimed interface %d \n", dInterfaceNumber);
-
+  //retVal = libusb_control_transfer(
+  //      retHandle,
+  //      0x00 /* bmRequestType */,
+  //      9 /* bRequest */,
+  //      0x0 /* wValue */,
+  //      0/* wIndex */,
+  //      0,
+  //      0,
+  //      0 /* standard device timeout */
+  //      );
+  uint8_t config[]={0x10, 0xff, 0x0d ,0x2e ,0x01, 0x00, 0x00};
+  unsigned char usb_data[33];
+  memset(&usb_data, '\0', 33);
+  memcpy(&usb_data, "\x10\xff\x0d\x2e\x01\x00\x00", 7);
+  retVal = controlTransfer(retHandle, 0x0210, usb_data , 0x07);
+  if (retVal < 0)
+    fprintf(stderr, "Sending message failed.\n");
+  uint8_t temp[]={0x11,0xff,0x0e,0x3e,0x00,0x01,0xfd,0x76,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+  memset(&usb_data, '\0', 33);
+  memcpy(&usb_data, "\x11\xff\x0e\x3e\x00\x01\xfd\x76\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20);
+  retVal = controlTransfer(retHandle, 0x0211, usb_data , 0x14);
+  if (retVal < 0)
+    fprintf(stderr, "Sending message failed.\n");
   printf("Cleanup\n");
   libusb_release_interface(retHandle, dInterfaceNumber);
   libusb_free_config_descriptor(dConfig);
