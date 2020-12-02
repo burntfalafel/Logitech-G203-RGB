@@ -204,14 +204,12 @@ handlerUSB()
   //      0,
   //      0 /* standard device timeout */
   //      );
-  uint8_t config[]={0x10, 0xff, 0x0d ,0x2e ,0x01, 0x00, 0x00};
   unsigned char usb_data[33];
   memset(&usb_data, '\0', 33);
   memcpy(&usb_data, "\x10\xff\x0d\x2e\x01\x00\x00", 7);
   retVal = controlTransfer(retHandle, 0x0210, usb_data , 0x07);
   if (retVal < 0)
     fprintf(stderr, "Sending message failed.\n");
-  uint8_t temp[]={0x11,0xff,0x0e,0x3e,0x00,0x01,0xfd,0x76,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
   memset(&usb_data, '\0', 33);
   memcpy(&usb_data, "\x11\xff\x0e\x3e\x00\x01\xfd\x76\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20);
   retVal = controlTransfer(retHandle, 0x0211, usb_data , 0x14);
