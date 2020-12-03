@@ -1,0 +1,2 @@
+clang
+-I/usr/local/include/hidapi/
