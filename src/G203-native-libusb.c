@@ -1,3 +1,6 @@
+//// @file
+//// @brief Uses the native libusb library to interact with the G203, which is not setting up a correct HID handshake
+////
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -168,6 +171,8 @@ handlerUSB()
     return FAIL_USB;
   }
   printf("Found %.2x interfaces on the USB device\n", dConfig->bNumInterfaces);
+
+  printf("With %d number of settings\n", dConfig->interface[2].num_altsetting);
 
   if(dConfig->interface[0].num_altsetting == 0)
   {
