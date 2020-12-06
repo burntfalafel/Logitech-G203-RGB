@@ -16,35 +16,32 @@
 #include <stdlib.h>
 #include "hidapi.h"
 #include <unistd.h>
+#include <ctype.h>
+#include <stdint.h>
+#define MAX_STR 255
+#define FAIL_USB -100
 
-int main(int argc, char* argv[])
+const uint16_t logitech_vendor_id = 0x046d;
+const uint16_t logitech_device_g203 = 0xc084;
+
+int
+handleUSB()
 {
-	(void)argc;
-	(void)argv;
-
-	int res;
+  int res;
 	unsigned char buf[256];
-	#define MAX_STR 255
 	wchar_t wstr[MAX_STR];
 	hid_device *handle;
 	int i;
 
 	struct hid_device_info *devs, *cur_dev;
 
-	printf("hidapi test/example tool. Compiled with hidapi version %s, runtime version %s.\n", HID_API_VERSION_STR, hid_version_str());
-	if (hid_version()->major == HID_API_VERSION_MAJOR && hid_version()->minor == HID_API_VERSION_MINOR && hid_version()->patch == HID_API_VERSION_PATCH) {
-		printf("Compile-time version matches runtime version of hidapi.\n\n");
-	}
-	else {
-		printf("Compile-time version is different than runtime version of hidapi.\n]n");
-	}
-
 	if (hid_init())
 		return -1;
 
-	devs = hid_enumerate(0x0, 0x0);
+	devs = hid_enumerate(logitech_vendor_id, logitech_device_g203);
 	cur_dev = devs;
-	while (cur_dev) {
+	if (cur_dev)
+  {
 		printf("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls", cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
 		printf("\n");
 		printf("  Manufacturer: %ls\n", cur_dev->manufacturer_string);
@@ -55,6 +52,11 @@ int main(int argc, char* argv[])
 		printf("\n");
 		cur_dev = cur_dev->next;
 	}
+  else
+  {
+   fprintf(stderr, "Could not get device descriptor\n");
+   return FAIL_USB;
+  }
 	hid_free_enumeration(devs);
 
 	// Set up the command buffer.
@@ -183,7 +185,23 @@ int main(int argc, char* argv[])
 	/* Free static HIDAPI objects. */
 	hid_exit();
 
-#ifdef WIN32
+  return 0;
+}
+
+int
+main(int argc, char* argv[])
+{
+	(void)argc;
+	(void)argv;
+
+  printf("hidapi test/example tool. Compiled with hidapi version %s, runtime version %s.\n", HID_API_VERSION_STR, hid_version_str());
+	if (hid_version()->major == HID_API_VERSION_MAJOR && hid_version()->minor == HID_API_VERSION_MINOR && hid_version()->patch == HID_API_VERSION_PATCH) {
+		printf("Compile-time version matches runtime version of hidapi.\n\n");
+	}
+	else {
+		printf("Compile-time version is different than runtime version of hidapi.\n]n");
+	}
+	#ifdef WIN32
 	system("pause");
 #endif
 
