@@ -107,7 +107,7 @@ handlerUSB()
 	libusb_device **devs = 0;
   libusb_device *deviceLogitech = 0;
   libusb_device_handle *retHandle = 0;
-  struct libusb_config_descriptor *dConfig ;
+  struct libusb_config_descriptor *dConfig;
   uint8_t dInterfaceNumber = 0;
 	int r = libusb_init(NULL);
 	if (r < 0)

@@ -15,13 +15,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "hidapi.h"
-
-// Headers needed for sleeping.
-#ifdef _WIN32
-	#include <windows.h>
-#else
-	#include <unistd.h>
-#endif
+#include <unistd.h>
 
 int main(int argc, char* argv[])
 {
