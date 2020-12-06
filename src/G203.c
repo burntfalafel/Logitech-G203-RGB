@@ -21,6 +21,7 @@
 #define MAX_STR 255
 #define FAIL_USB -100
 
+unsigned char usb_data[33];
 const uint16_t logitech_vendor_id = 0x046d;
 const uint16_t logitech_device_g203 = 0xc084;
 
@@ -68,60 +69,21 @@ handleUSB()
 	// Open the device using the VID, PID,
 	// and optionally the Serial number.
 	////handle = hid_open(0x4d8, 0x3f, L"12345");
-	handle = hid_open(0x4d8, 0x3f, NULL);
+	handle = hid_open(logitech_vendor_id, logitech_device_g203, NULL);
 	if (!handle) {
 		printf("unable to open device\n");
- 		return 1;
+ 		return FAIL_USB;
 	}
 
-	// Read the Manufacturer String
-	wstr[0] = 0x0000;
-	res = hid_get_manufacturer_string(handle, wstr, MAX_STR);
-	if (res < 0)
-		printf("Unable to read manufacturer string\n");
-	printf("Manufacturer String: %ls\n", wstr);
-
-	// Read the Product String
-	wstr[0] = 0x0000;
-	res = hid_get_product_string(handle, wstr, MAX_STR);
-	if (res < 0)
-		printf("Unable to read product string\n");
-	printf("Product String: %ls\n", wstr);
-
-	// Read the Serial Number String
-	wstr[0] = 0x0000;
-	res = hid_get_serial_number_string(handle, wstr, MAX_STR);
-	if (res < 0)
-		printf("Unable to read serial number string\n");
-	printf("Serial Number String: (%d) %ls", wstr[0], wstr);
-	printf("\n");
-
-	// Read Indexed String 1
-	wstr[0] = 0x0000;
-	res = hid_get_indexed_string(handle, 1, wstr, MAX_STR);
-	if (res < 0)
-		printf("Unable to read indexed string 1\n");
-	printf("Indexed String 1: %ls\n", wstr);
-
-	// Set the hid_read() function to be non-blocking.
-	hid_set_nonblocking(handle, 1);
-
-	// Try to read from the device. There should be no
-	// data here, but execution should not block.
-	res = hid_read(handle, buf, 17);
-
+  /*
 	// Send a Feature Report to the device
-	buf[0] = 0x2;
-	buf[1] = 0xa0;
-	buf[2] = 0x0a;
-	buf[3] = 0x00;
-	buf[4] = 0x00;
-	res = hid_send_feature_report(handle, buf, 17);
+  memset(&usb_data, '\0', sizeof(usb_data));
+  //memcpy(&usb_data, "\x10\xff\x0d\x2e\x01\x00\x00", 7);
+  memcpy(&usb_data, "\x11\xff\x0e\x3e\x00\x01\xfd\x76\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20);
+	res = hid_send_feature_report(handle, usb_data, 17);
 	if (res < 0) {
 		printf("Unable to send a feature report.\n");
 	}
-
-	memset(buf,0,sizeof(buf));
 
 	// Read a Feature Report from the device
 	buf[0] = 0x2;
@@ -137,48 +99,26 @@ handleUSB()
 			printf("%02hhx ", buf[i]);
 		printf("\n");
 	}
-
-	memset(buf,0,sizeof(buf));
+  */
 
 	// Toggle LED (cmd 0x80). The first byte is the report number (0x1).
-	buf[0] = 0x1;
-	buf[1] = 0x80;
-	res = hid_write(handle, buf, 17);
+  memset(&usb_data, '\0', sizeof(usb_data));
+  memcpy(&usb_data, "\x11\xff\x0e\x3e\x00\x01\xfd\x76\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x21", 21);
+	res = hid_write(handle, usb_data, 21);
 	if (res < 0) {
 		printf("Unable to write()\n");
 		printf("Error: %ls\n", hid_error(handle));
 	}
 
 
+  /*
 	// Request state (cmd 0x81). The first byte is the report number (0x1).
 	buf[0] = 0x1;
 	buf[1] = 0x81;
 	hid_write(handle, buf, 17);
 	if (res < 0)
 		printf("Unable to write() (2)\n");
-
-	// Read requested state. hid_read() has been set to be
-	// non-blocking by the call to hid_set_nonblocking() above.
-	// This loop demonstrates the non-blocking nature of hid_read().
-	res = 0;
-	while (res == 0) {
-		res = hid_read(handle, buf, sizeof(buf));
-		if (res == 0)
-			printf("waiting...\n");
-		if (res < 0)
-			printf("Unable to read()\n");
-		#ifdef WIN32
-		Sleep(500);
-		#else
-		usleep(500*1000);
-		#endif
-	}
-
-	printf("Data read:\n   ");
-	// Print out the returned buffer.
-	for (i = 0; i < res; i++)
-		printf("%02hhx ", buf[i]);
-	printf("\n");
+  */
 
 	hid_close(handle);
 
@@ -201,6 +141,8 @@ main(int argc, char* argv[])
 	else {
 		printf("Compile-time version is different than runtime version of hidapi.\n]n");
 	}
+  int output = handleUSB();
+  printf("%d\n", output);
 	#ifdef WIN32
 	system("pause");
 #endif
