@@ -19,3 +19,17 @@
 [PR tracker](https://stackoverflow.com/questions/65086528/reverse-engineering-a-usbhid-logitech-mouse-driver)
 
 [RGB C driver for a keyboard](https://github.com/wroberts/rogauracore/blob/master/src/rogauracore.c)
+
+[Debug Logitech devices](https://lekensteyn.nl/logitech-unifying.html)
+
+[PR tracker](https://stackoverflow.com/questions/65179875/incorrect-implementation-of-request-type-in-libusb-when-replicating-a-usbhid-tra)
+
+[How to load your own *custom* mouse driver](https://stackoverflow.com/questions/25175960/which-drivers-are-used-by-usb-mouse-in-linux-kernel)
+
+If want to use Wireshark debugging in Linux
+```
+sudo modprobe usbmon
+# Use the below in bash
+sudo setfacl -m u:$USER:r /dev/usbmon*
+```
+
