@@ -61,10 +61,11 @@ static void print_devs(libusb_device **devs)
 
 int
 controlTransfer(libusb_device_handle *pHandle, uint32_t wValue, unsigned char *sData, uint16_t wLength) {
+  printf("%04x\n",LIBUSB_REQUEST_TYPE_CLASS|LIBUSB_RECIPIENT_INTERFACE|LIBUSB_ENDPOINT_OUT);
     int retVal = libusb_control_transfer(
         pHandle,
         LIBUSB_REQUEST_TYPE_CLASS|LIBUSB_RECIPIENT_INTERFACE|LIBUSB_ENDPOINT_OUT /* 0x21 bmRequestType */,
-        0x09 /* bRequest */,
+        9 /* bRequest */,
         wValue /* wValue */,
         0x0001 /* wIndex */,
         sData,
@@ -211,13 +212,17 @@ handlerUSB()
   //      );
   unsigned char usb_data[33];
   memset(&usb_data, '\0', 33);
+  retVal = libusb_control_transfer(retHandle, 0x80, 0x9, 0x0, 0x0, usb_data, 0x0, 0);
+  if (retVal < 0)
+    fprintf(stderr, "Sending message failed.\n");
+  memset(&usb_data, '\0', 33);
   memcpy(&usb_data, "\x10\xff\x0d\x2e\x01\x00\x00", 7);
-  retVal = controlTransfer(retHandle, 0x0210, usb_data , 0x07);
+  retVal = controlTransfer(retHandle, 0x0210, usb_data , 7);
   if (retVal < 0)
     fprintf(stderr, "Sending message failed.\n");
   memset(&usb_data, '\0', 33);
   memcpy(&usb_data, "\x11\xff\x0e\x3e\x00\x01\xfd\x76\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20);
-  retVal = controlTransfer(retHandle, 0x0211, usb_data , 0x14);
+  retVal = controlTransfer(retHandle, 0x0211, usb_data , 20);
   if (retVal < 0)
     fprintf(stderr, "Sending message failed.\n");
   printf("Cleanup\n");
