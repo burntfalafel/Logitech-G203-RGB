@@ -6,6 +6,6 @@ This is an attempt to replace the use of [Logitech G Hub](https://www.logitechg.
 This has been designed for G-203 and can be compiled using;
 
 ```
-make
+make debug
 ```
 and run using `./G203`. This repo is incomplete and is not the end product I had hoped to deliver hence can be used for reference.
