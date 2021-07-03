@@ -175,7 +175,7 @@ handlerUSB()
 
   printf("With %d number of settings\n", dConfig->interface[2].num_altsetting);
 
-  if(dConfig->interface[0].num_altsetting == 0)
+  if(dConfig->interface[1].num_altsetting == 0)
   {
     fprintf(stderr, "No interface descriptors for the first interface of the USB device.\n");
     libusb_free_config_descriptor(dConfig);
@@ -184,10 +184,16 @@ handlerUSB()
     libusb_exit(NULL);
     return FAIL_USB;
   }
-  //A source of error as I have chosen interface 0 from wireshark interface ID
-  //for (int i =0; i<10;i++)
-  //printf("%0.2x\n", dConfig->interface[0].altsetting[i].bLength);
-  dInterfaceNumber = dConfig->interface[0].altsetting[0].bInterfaceNumber;
+  // for (int i =0; i<10;i++)
+  // printf("%0.2x\n", dConfig->interface[0].altsetting[i].bInterfaceNumber);
+  // printf("---------------------------\n");
+  // for (int i =0; i<10;i++)
+  // printf("%0.2x\n", dConfig->interface[0].altsetting[i].bInterfaceClass);
+  // printf("---------------------------\n");
+  // for (int i =0; i<10;i++)
+  // printf("%0.2x\n", dConfig->interface[0].altsetting[i].bLength);
+  
+  dInterfaceNumber = dConfig->interface[1].altsetting[0].bInterfaceNumber;
 
   retVal = libusb_claim_interface(retHandle, dInterfaceNumber);
   if(retVal<0)
@@ -210,21 +216,18 @@ handlerUSB()
   //      0,
   //      0 /* standard device timeout */
   //      );
-  unsigned char usb_data[33];
-  memset(&usb_data, '\0', 33);
-  retVal = libusb_control_transfer(retHandle, 0x80, 0x9, 0x0, 0x0, usb_data, 0x0, 0);
+  unsigned char usb_data[8];
+  memset(&usb_data, '\0', 7);
+  memcpy(&usb_data, "\x10\xff\x0f\x2f\x00\x00\x00", 7);
+  // memcpy(&usb_data, "10ff0f2f000000", 7);
+  for (int i=0; i<=7; i++)
+  printf("%x",usb_data[i]);
+  printf("\n");
+
+  retVal = libusb_control_transfer(retHandle, 0x21, 0x09, 0x0210, 1,  usb_data, 7, 0);
   if (retVal < 0)
     fprintf(stderr, "Sending message failed.\n");
-  memset(&usb_data, '\0', 33);
-  memcpy(&usb_data, "\x10\xff\x0d\x2e\x01\x00\x00", 7);
-  retVal = controlTransfer(retHandle, 0x0210, usb_data , 7);
-  if (retVal < 0)
-    fprintf(stderr, "Sending message failed.\n");
-  memset(&usb_data, '\0', 33);
-  memcpy(&usb_data, "\x11\xff\x0e\x3e\x00\x01\xfd\x76\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20);
-  retVal = controlTransfer(retHandle, 0x0211, usb_data , 20);
-  if (retVal < 0)
-    fprintf(stderr, "Sending message failed.\n");
+  
   printf("Cleanup\n");
   libusb_release_interface(retHandle, dInterfaceNumber);
   libusb_free_config_descriptor(dConfig);

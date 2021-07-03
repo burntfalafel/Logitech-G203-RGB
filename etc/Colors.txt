@@ -1,6 +1,8 @@
 Colors
 
 usb.src == "host" && usb.transfer_type !="URB_INTERRUPT"
+usb.src == "host"  && usb.dst == "7.3.2"
+usb.src == "host" && usb.function==URB_FUNCTION_CLASS_INTERFACE
 
 (COLOR)
 Frame 1811: 56 bytes on wire (448 bits), 56 bytes captured (448 bits) on interface wireshark_extcap4056, id 0
