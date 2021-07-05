@@ -25,10 +25,16 @@ typedef struct {
 } Color;
 
 typedef struct {
+  int iterations;
   uint32_t wValue;
   unsigned char* usb_data;
   uint16_t wLength;
 } usbMessages;
+
+typedef struct{
+  int nMessages;
+  usbMessages messages[2];
+} bMessages;
 
 typedef struct {
     Color colors[MAX_NUM_COLORS];
@@ -107,7 +113,7 @@ checkDevice(libusb_device *pDevice)
 }
 
 int
-handlerUSB( usbMessages *messages )
+handlerUSB( bMessages messagebox )
 {
   int retVal = 0;
 	struct libusb_device_descriptor desc;
@@ -205,8 +211,10 @@ handlerUSB( usbMessages *messages )
   }
   printf("Claimed interface %d \n", dInterfaceNumber);
 
-  controlTransfer(retHandle, messages[0].wValue, messages[0].usb_data, messages[0].wLength);
-  
+  for (int i=0; i<messagebox.nMessages; i++)
+    for (int j=0; j<=messagebox.messages[i].iterations; j++)
+      controlTransfer(retHandle, messagebox.messages[i].wValue, messagebox.messages[i].usb_data, messagebox.messages[i].wLength);
+    
   printf("Cleanup\n");
   libusb_release_interface(retHandle, dInterfaceNumber);
   libusb_free_config_descriptor(dConfig);
@@ -218,9 +226,15 @@ handlerUSB( usbMessages *messages )
 
 int main(void)
 {
-  usbMessages messages[10];
-  messages[0] = (usbMessages){.wValue = 0x0210,.usb_data = (unsigned char*)"\x10\xff\x0f\x2f\x00\x00\x00", .wLength = 7};
-  int status = handlerUSB(messages);
+  bMessages containerMessage =
+  (bMessages){
+    .nMessages = 2,
+    .messages = {
+      { 0, 0x0210, (unsigned char*)"\x10\xff\x0f\x2f\x00\x00\x00",  7},
+      { 0, 0x0210, (unsigned char*)"\x10\xff\x0f\x2f\x00\x00\x00",  7}
+    }
+  };
+  int status = handlerUSB(containerMessage);
   printf("%d\n",status);
 	return 0;
 }
