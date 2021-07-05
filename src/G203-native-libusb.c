@@ -5,6 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "libusb-1.0/libusb.h"
+
 #define FAIL_USB -100
 #define URB_MESSAGE_LENGTH 28
 #define SETUP_CONFIG_MESSAGE_LENGTH 8
@@ -22,6 +23,12 @@ typedef struct {
     uint8_t nGreen;
     uint8_t nBlue;
 } Color;
+
+typedef struct {
+  uint32_t wValue;
+  unsigned char* usb_data;
+  uint16_t wLength;
+} usbMessages;
 
 typedef struct {
     Color colors[MAX_NUM_COLORS];
@@ -61,11 +68,10 @@ static void print_devs(libusb_device **devs)
 
 int
 controlTransfer(libusb_device_handle *pHandle, uint32_t wValue, unsigned char *sData, uint16_t wLength) {
-  printf("%04x\n",LIBUSB_REQUEST_TYPE_CLASS|LIBUSB_RECIPIENT_INTERFACE|LIBUSB_ENDPOINT_OUT);
     int retVal = libusb_control_transfer(
         pHandle,
-        LIBUSB_REQUEST_TYPE_CLASS|LIBUSB_RECIPIENT_INTERFACE|LIBUSB_ENDPOINT_OUT /* 0x21 bmRequestType */,
-        9 /* bRequest */,
+        0x21 /* bmRequestType */,
+        0x09 /* bRequest */,
         wValue /* wValue */,
         0x0001 /* wIndex */,
         sData,
@@ -101,7 +107,7 @@ checkDevice(libusb_device *pDevice)
 }
 
 int
-handlerUSB()
+handlerUSB( usbMessages *messages )
 {
   int retVal = 0;
 	struct libusb_device_descriptor desc;
@@ -184,15 +190,7 @@ handlerUSB()
     libusb_exit(NULL);
     return FAIL_USB;
   }
-  // for (int i =0; i<10;i++)
-  // printf("%0.2x\n", dConfig->interface[0].altsetting[i].bInterfaceNumber);
-  // printf("---------------------------\n");
-  // for (int i =0; i<10;i++)
-  // printf("%0.2x\n", dConfig->interface[0].altsetting[i].bInterfaceClass);
-  // printf("---------------------------\n");
-  // for (int i =0; i<10;i++)
-  // printf("%0.2x\n", dConfig->interface[0].altsetting[i].bLength);
-  
+
   dInterfaceNumber = dConfig->interface[1].altsetting[0].bInterfaceNumber;
 
   retVal = libusb_claim_interface(retHandle, dInterfaceNumber);
@@ -206,27 +204,8 @@ handlerUSB()
     return retVal;
   }
   printf("Claimed interface %d \n", dInterfaceNumber);
-  //retVal = libusb_control_transfer(
-  //      retHandle,
-  //      0x00 /* bmRequestType */,
-  //      9 /* bRequest */,
-  //      0x0 /* wValue */,
-  //      0/* wIndex */,
-  //      0,
-  //      0,
-  //      0 /* standard device timeout */
-  //      );
-  unsigned char usb_data[8];
-  memset(&usb_data, '\0', 7);
-  memcpy(&usb_data, "\x10\xff\x0f\x2f\x00\x00\x00", 7);
-  // memcpy(&usb_data, "10ff0f2f000000", 7);
-  for (int i=0; i<=7; i++)
-  printf("%x",usb_data[i]);
-  printf("\n");
 
-  retVal = libusb_control_transfer(retHandle, 0x21, 0x09, 0x0210, 1,  usb_data, 7, 0);
-  if (retVal < 0)
-    fprintf(stderr, "Sending message failed.\n");
+  controlTransfer(retHandle, messages[0].wValue, messages[0].usb_data, messages[0].wLength);
   
   printf("Cleanup\n");
   libusb_release_interface(retHandle, dInterfaceNumber);
@@ -239,7 +218,9 @@ handlerUSB()
 
 int main(void)
 {
-  int status = handlerUSB();
+  usbMessages messages[10];
+  messages[0] = (usbMessages){.wValue = 0x0210,.usb_data = (unsigned char*)"\x10\xff\x0f\x2f\x00\x00\x00", .wLength = 7};
+  int status = handlerUSB(messages);
   printf("%d\n",status);
 	return 0;
 }
