@@ -220,7 +220,10 @@ handlerUSB( usbMessages *uMessages, uint32_t numMessages )
 
   dInterfaceNumber = dConfig->interface[1].altsetting[0].bInterfaceNumber;
 
-  retVal = libusb_claim_interface(retHandle, dInterfaceNumber);
+  for (uint32_t i=0; i<numMessages; i++)
+    for (uint32_t j=0; j<uMessages[i].iterations; j++)
+    {
+retVal = libusb_claim_interface(retHandle, dInterfaceNumber);
   if(retVal<0)
   {
     fprintf(stderr, "Could not claim interface: %s.\n", libusb_error_name(retVal));
@@ -232,12 +235,10 @@ handlerUSB( usbMessages *uMessages, uint32_t numMessages )
   }
   printf("Claimed interface %d \n", dInterfaceNumber);
 
-  for (uint32_t i=0; i<numMessages; i++)
-    for (uint32_t j=0; j<uMessages[i].iterations; j++)
       controlTransfer(retHandle, uMessages[i].wValue, uMessages[i].usb_data, uMessages[i].wLength);
-    
+      libusb_release_interface(retHandle, dInterfaceNumber);
+    }
   printf("Cleanup\n");
-  libusb_release_interface(retHandle, dInterfaceNumber);
   libusb_free_config_descriptor(dConfig);
   libusb_close(retHandle);
   libusb_free_device_list(devs, 1);
