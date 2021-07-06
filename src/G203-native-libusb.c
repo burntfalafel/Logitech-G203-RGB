@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
+#include <errno.h>
+
 #include "libusb-1.0/libusb.h"
 
 #define FAIL_USB -100
@@ -25,21 +28,38 @@ typedef struct {
 } Color;
 
 typedef struct {
-  int iterations;
+  uint32_t iterations;
   uint32_t wValue;
   unsigned char* usb_data;
   uint16_t wLength;
 } usbMessages;
 
-typedef struct{
-  int nMessages;
-  usbMessages messages[2];
-} bMessages;
-
 typedef struct {
     Color colors[MAX_NUM_COLORS];
     int scalars[MAX_NUM_SCALARS];
 } Arguments;
+
+/* msleep(): Sleep for the requested number of milliseconds. */
+int msleep(long msec)
+{
+    struct timespec ts;
+    int res;
+
+    if (msec < 0)
+    {
+        errno = EINVAL;
+        return -1;
+    }
+
+    ts.tv_sec = msec / 1000;
+    ts.tv_nsec = (msec % 1000) * 1000000;
+
+    do {
+        res = nanosleep(&ts, &ts);
+    } while (res && errno == EINTR);
+
+    return res;
+}
 
 uint8_t MESSAGE_SET_CONFIGURATION[URB_MESSAGE_LENGTH] = {};
 const uint16_t logitech_vendor_id = 0x046d;
@@ -87,6 +107,7 @@ controlTransfer(libusb_device_handle *pHandle, uint32_t wValue, unsigned char *s
     if (retVal < 0) {
         fprintf(stderr, "Control transfer error: %s\n", libusb_error_name(retVal));
     }
+    msleep(20);
     return retVal;
 }
 
@@ -113,7 +134,7 @@ checkDevice(libusb_device *pDevice)
 }
 
 int
-handlerUSB( bMessages messagebox )
+handlerUSB( usbMessages *uMessages, uint32_t numMessages )
 {
   int retVal = 0;
 	struct libusb_device_descriptor desc;
@@ -211,9 +232,9 @@ handlerUSB( bMessages messagebox )
   }
   printf("Claimed interface %d \n", dInterfaceNumber);
 
-  for (int i=0; i<messagebox.nMessages; i++)
-    for (int j=0; j<=messagebox.messages[i].iterations; j++)
-      controlTransfer(retHandle, messagebox.messages[i].wValue, messagebox.messages[i].usb_data, messagebox.messages[i].wLength);
+  for (uint32_t i=0; i<numMessages; i++)
+    for (uint32_t j=0; j<uMessages[i].iterations; j++)
+      controlTransfer(retHandle, uMessages[i].wValue, uMessages[i].usb_data, uMessages[i].wLength);
     
   printf("Cleanup\n");
   libusb_release_interface(retHandle, dInterfaceNumber);
@@ -226,15 +247,27 @@ handlerUSB( bMessages messagebox )
 
 int main(void)
 {
-  bMessages containerMessage =
-  (bMessages){
-    .nMessages = 2,
-    .messages = {
-      { 0, 0x0210, (unsigned char*)"\x10\xff\x0f\x2f\x00\x00\x00",  7},
-      { 0, 0x0210, (unsigned char*)"\x10\xff\x0f\x2f\x00\x00\x00",  7}
-    }
+  usbMessages colorMessages[] = {
+    { 1, 0x0210, (unsigned char*)"\x10\xff\x0f\x2f\x00\x00\x00",  7},
+    { 35, 0x0210, (unsigned char*)"\x10\xff\x0f\x0f\x00\x00\x00",  7},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x6f\x00\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x01\x01\x00\x78\x05\xf6\x09\x7a\x0d\xfe\x10\x56\x13\xff\xff\xff", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\xff\x00\x15\x00\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x80\x01\x00\x01\x80\x01\x00\x02\x80\x01\x00\x04\x80\x01\x00\x08", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x80\x01\x00\x10\x90\x05\x00\x00\xff\xff\xff\xff\xff\xff\xff\xff", 20},
+    { 2, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x80\x01\x00\x01\x80\x01\x00\x02\x80\x01\x00\x04\x80\x01\x00\x08", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x80\x01\x00\x10\x90\x05\x00\x00\xff\xff\xff\xff\xff\xff\xff\xff", 20},
+    { 2, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x50\x00\x72\x00\x6f\x00\x66\x00\x69\x00\x6c\x00\x65\x00\x20\x00", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x31\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x01\xbf\x00\xff\x02\x00\x00\x00\x00\x00\x00\x01\xbf\x00\xff\x02", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\x00\x00\x00\x00\x00\x00\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff", 20},
+    { 1, 0x0211, (unsigned char*)"\x11\xff\x0f\x7f\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x05\xed", 20},
+    { 1, 0x0210, (unsigned char*)"\x10\xff\x0f\x8f\x00\x00\x00", 7}
   };
-  int status = handlerUSB(containerMessage);
+  int status = handlerUSB(colorMessages, 18);
   printf("%d\n",status);
 	return 0;
 }

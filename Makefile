@@ -3,7 +3,7 @@ LIBUSB_CFILES = src/G203-native-libusb.c # means orginal
 CFILES = $(HID_CFILES) $(LIBUSB_CFILES)
 IDIR = -Iinclude/ -I/usr/local/include/hidapi
 CC = gcc
-CFLAGS= -std=c11 -Wall -Wextra $(IDIR)
+CFLAGS= -std=gnu11 -Wall -Wextra $(IDIR)
 
 LDIR = -L/usr/local/lib  -L/usr/lib/x86_64-linux-gnu
 
