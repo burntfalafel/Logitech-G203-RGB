@@ -1,5 +1,5 @@
 HID_CFILES = src/G203.c
-LIBUSB_CFILES = src/G203-native-libusb.c # means orginal
+LIBUSB_CFILES = include/gopt/gopt.c src/G203-native-libusb.c # means orginal
 CFILES = $(HID_CFILES) $(LIBUSB_CFILES)
 IDIR = -Iinclude/ -I/usr/local/include/hidapi
 CC = gcc

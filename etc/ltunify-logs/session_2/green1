@@ -1,0 +1,111 @@
+17:39:38.252 Send       report_id=10 short device=FF RECV type=0F                         params=2F 00 00 00
+17:39:38.254 Recv       report_id=11 long  device=FF RECV type=0F                         params=2F 01 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:38.773 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.775 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.779 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.781 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.785 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.787 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.791 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.793 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.797 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.799 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.803 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.805 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.808 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.810 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.813 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.815 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.818 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.820 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.823 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.825 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.828 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.830 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.833 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.835 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.839 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.841 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.845 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.847 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.851 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.853 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.858 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.860 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.863 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.865 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.868 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.870 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.873 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.875 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.878 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.880 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.883 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.885 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.888 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.890 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.893 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.895 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.898 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.901 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.906 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.908 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.912 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.914 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.919 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.921 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.925 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.927 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.930 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.932 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.937 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.939 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.942 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.944 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.948 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.950 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.953 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.955 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.958 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.960 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.964 Send       report_id=10 short device=FF RECV type=0F                         params=0F 00 00 00
+17:39:38.966 Recv       report_id=11 long  device=FF RECV type=0F                         params=0F 01 02 01  01 01 06 07  01 00 0A 01  00 00 00 00  00
+17:39:38.970 Send       report_id=11 long  device=FF RECV type=0F                         params=6F 00 01 00  00 01 00 00  00 00 00 00  00 00 00 00  00
+17:39:38.972 Recv       report_id=11 long  device=FF RECV type=0F                         params=6F 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:38.975 Send       report_id=11 long  device=FF RECV type=0F                         params=7F 01 01 00  90 01 20 03  40 06 80 0C  00 00 FF FF  FF
+17:39:38.977 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 01 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:38.981 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF 00 FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:38.983 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 02 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:38.986 Send       report_id=11 long  device=FF RECV type=0F                         params=7F 80 01 00  01 80 01 00  02 80 01 00  04 80 01 00  08
+17:39:38.988 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 03 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:38.991 Send       report_id=11 long  device=FF RECV type=0F                         params=7F 80 01 00  10 90 05 00  00 FF FF FF  FF FF FF FF  FF
+17:39:38.993 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 04 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:38.996 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:38.999 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 05 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.003 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.005 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 06 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.009 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.011 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 07 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.015 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.017 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 08 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.023 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.025 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 09 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.029 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.031 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 0A 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.035 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.037 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 0B 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.043 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.045 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 0C 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.048 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.050 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 0D 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.053 Send       report_id=11 long  device=FF RECV type=0F                         params=7F 01 00 FF  48 02 00 00  00 00 00 00  01 00 FF 48  02
+17:39:39.055 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 0E 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.060 Send       report_id=11 long  device=FF RECV type=0F                         params=7F 00 00 00  00 00 00 FF  FF FF FF FF  FF FF FF FF  FF
+17:39:39.062 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 0F 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.065 Send       report_id=11 long  device=FF RECV type=0F                         params=7F FF FF FF  FF FF FF FF  FF FF FF FF  FF FF FF AD  95
+17:39:39.067 Recv       report_id=11 long  device=FF RECV type=0F                         params=7F 00 10 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.070 Send       report_id=10 short device=FF RECV type=0F                         params=8F 00 00 00
+17:39:39.171 Recv       report_id=11 long  device=FF RECV type=0F                         params=8F 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00
+17:39:39.173 Recv       report_id=01 unkn  device=00      type=00                         params=00 00 00 00  00 00
+17:39:39.173 Recv       report_id=00 unkn  device=00      type=00                         params=00 00 00 00  00
+17:39:39.175 Recv       report_id=03 unkn  device=00      type=00                         params=00 00

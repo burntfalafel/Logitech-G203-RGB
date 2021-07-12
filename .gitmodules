@@ -1,3 +1,6 @@
 [submodule "etc/ltunify"]
 	path = etc/ltunify
 	url = https://git.lekensteyn.nl/ltunify.git
+[submodule "include/gopt"]
+	path = include/gopt
+	url = https://github.com/thoni56/gopt
