@@ -32,4 +32,3 @@ sudo modprobe usbmon
 # Use the below in bash
 sudo setfacl -m u:$USER:r /dev/usbmon*
 ```
-
