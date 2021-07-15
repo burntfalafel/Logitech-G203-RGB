@@ -210,7 +210,7 @@ int formatColor(char* color, unsigned char color_fmt[3]) {
  }
  return 0;
 }
-unsigned char* 
+unsigned char*
 colorString( char color[6])
 {
   unsigned char color_fmt[3];
@@ -226,13 +226,13 @@ colorString( char color[6])
   return usb_data;
 }
 
-int 
+int
 solidColor(char* color) {
   int status = 0;
   unsigned char *colorData = colorString(color);
   if (colorData){
     usbMessages colorMessages[] = {
-      { 1, 0x0211, colorData , 20}, 
+      { 1, 0x0211, colorData , 20},
     };
     status = handlerUSB(colorMessages, 1);
   }
@@ -305,7 +305,7 @@ cycleColorString(int rate, int bright){
   return usb_data;
   }
 
-int 
+int
 cycleColor(char* params) {
   int intparams[2];
   int status = parseStringToInt(params, intparams, 2);
@@ -342,7 +342,7 @@ breatheColorString(char* color, int rate, int bright){
   unsigned char color_fmt[3];
   unsigned char *usb_data = (unsigned char*) malloc(sizeof(unsigned char)*20);
   memset(usb_data, '\0', 20);
-  
+
   if(formatColor(color, color_fmt))
   {
     return NULL;
@@ -361,10 +361,10 @@ breatheColorString(char* color, int rate, int bright){
 }
 
 
-int 
+int
 breatheColor(char* params) {
   int intparams[3];
-  
+
   int status = parseStringToInt(params, intparams, 3);
   if (status)
   {
@@ -373,7 +373,7 @@ breatheColor(char* params) {
   }
   const char *delim = ",";
   char *params_prfx = strtok(params, delim);
-  
+
   unsigned char* colorData = breatheColorString(params_prfx, intparams[1], intparams[2]);
   if(colorData){
     usbMessages colorMessages[] = {
@@ -389,13 +389,13 @@ breatheColor(char* params) {
   return status;
 }
 
-unsigned char* 
+unsigned char*
 dpiString( int dpi)
 {
   if(dpi<200 || dpi>8000)
   {
     fprintf(stderr, "DPI value parameter exceeds limit");
-    return NULL; 
+    return NULL;
   }
   unsigned char *usb_data = (unsigned char*) malloc(sizeof(unsigned char)*7);
   memset(usb_data, '\0', 7);
@@ -407,7 +407,7 @@ dpiString( int dpi)
   return usb_data;
 }
 
-int 
+int
 changeDPI(char* params) {
   int dpiValue = strtol(params,NULL, 10);
   int status = 0;
@@ -435,7 +435,7 @@ void remove_spaces(char* s) {
     } while (*s++ = *d++);
 }
 
-int 
+int
 main(int argc, const char **argv)
 {
   int status = 1;
@@ -448,9 +448,9 @@ main(int argc, const char **argv)
       gopt_option( 'o', 0, gopt_shorts( 'o' ), gopt_longs( "off", "OFF" )),
       gopt_option( 's', GOPT_ARG, gopt_shorts( 's' ), gopt_longs( "solid", "SOLID" )),
       gopt_option( 'd', GOPT_ARG, gopt_shorts( 'd' ), gopt_longs( "dpi", "DPI" ))));
-  
+
   if(gopt(options, 'h')) {
-    printf("\nLogitech G203 Prodigy mouse LED control \n\n Arguments \n \
+    printf("Logitech G203 Prodigy mouse LED control \n\n Arguments \n \
     -h, --help                                      Show this help message and exit\n \
     -c, --cycle <rate>,<brightness>                 Cycles the RGB color for the mouse\n \
     -b. --breathe <color>,<rate>,<brightness>       Breathes a RGB color with rate a brightness\n \
@@ -492,6 +492,6 @@ main(int argc, const char **argv)
     status = solidColor(params);
     return status;
   }
-  
+
   return status;
 }

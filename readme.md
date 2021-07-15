@@ -5,8 +5,7 @@ A C app for changing the color for the G203 Prodigy mouse. Logitech thought it w
 
 How to use:
 ```
- user@user-domain  ~  G203colorshifter -h
-
+ user@user-domain >>> G203colorshifter -h
  Logitech G203 Prodigy mouse LED control
 
  Arguments
