@@ -1,3 +1,5 @@
+# Useful debugging links and commands
+
 `lsusb -v -d 046d:c084`
 
 [Basic USB/libusb terminology](https://www.oreilly.com/library/view/linux-device-drivers/0596005903/ch13.html)
@@ -32,3 +34,13 @@ sudo modprobe usbmon
 # Use the below in bash
 sudo setfacl -m u:$USER:r /dev/usbmon*
 ```
+
+# Why Onboard Memory Manager is so secretive
+
+By using logging tools such as wireshark and ltunify, it was known a random hash value is being used by the program to obfuscate the packets. Consider every time you open and close Onboard Memory Manager app in Windows/Mac to be a session. Hence, as shown in first figure below - we are comparing a solid color packet being sent to mouse. 
+![Red packets being sent on the left. Yellow on the right](../pics/samesession.png)
+One can see that the only difference is the hex value of the colors which has been input twice in that same packet (line 101). The second difference is in line 105 - which is where it gets tricky. The last 2 bytes are randomly assigned (or here use a hash value). This value is the exact same if the same color is sent in the *same session*. If not: 
+![Red packets between two different sessions](../pics/differentsession.png)
+You can see there is a huge difference between the two - even though the RGB data value they are sending is the same(#FF0000 again on line 101). This led me to conclusion that based on the packets sent earlier - the values are pushed into this *hash function* and generates 2 byte hashes which are then appended to line 105.
+
+Though we can still change RGB/DPI values in register 3 of the mouse which is the oasis in the middle of this desert! 
