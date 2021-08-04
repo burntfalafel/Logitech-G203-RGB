@@ -28,6 +28,11 @@ How to use:
 ```
 
 ## Build from source
+#### Dependencies
+
+- libusb-1.0-0-dev
+
+#### Build instructions
 
 Use the Makefile supplied as:
 ```
@@ -41,7 +46,7 @@ make uninstall
 ```
 ## What about a full replication of Logitech's Onboard Memory Manager
 
-A replica has been made but a full duplication in functionality for Linux is not possible because of hash values (discussed [here](https://gitlab.com/wady101/rgb-logitech-g203/-/tree/master/etc/readme.md) by me). Your best bet would be to use a Windows VM.
+A replica has been made but a full duplication in functionality for Linux is not possible because of hash values (discussed [here](https://github.com/burntfalafel/Logitech-G203-RGB/-/tree/master/etc/readme.md) by me). Your best bet would be to use a Windows VM.
 ```
 make G203MMO
 ```
