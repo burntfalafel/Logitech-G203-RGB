@@ -28,7 +28,7 @@
 
 [How to load your own *custom* mouse driver](https://stackoverflow.com/questions/25175960/which-drivers-are-used-by-usb-mouse-in-linux-kernel)
 
-If want to use Wireshark debugging in Linux
+If want to use Wireshark debugging in Linux or don't want to run the binary as root!
 ```
 sudo modprobe usbmon
 # Use the below in bash
