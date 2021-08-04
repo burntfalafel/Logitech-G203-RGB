@@ -46,7 +46,7 @@ make uninstall
 ```
 ## What about a full replication of Logitech's Onboard Memory Manager
 
-A replica has been made but a full duplication in functionality for Linux is not possible because of hash values (discussed [here](https://github.com/burntfalafel/Logitech-G203-RGB/-/tree/master/etc/readme.md) by me). Your best bet would be to use a Windows VM.
+A replica has been made but a full duplication in functionality for Linux is not possible because of hash values (discussed [here](https://github.com/burntfalafel/Logitech-G203-RGB/blob/master/etc/readme.md) by me). Your best bet would be to use a Windows VM.
 ```
 make G203MMO
 ```
@@ -55,4 +55,4 @@ Though, G203colorshifter should do most of what you want do anyways.
 
 ## What about a full replication of Logitech's G-Hub
 
-Deprecated software written [here](https://gitlab.com/wady101/rgb-logitech-g203/-/tree/logitech-g-hub)
+Deprecated software written [here](https://github.com/burntfalafel/Logitech-G203-RGB/tree/logitech-g-hub)
