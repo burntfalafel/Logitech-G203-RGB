@@ -5,7 +5,7 @@ CC = clang
 CFLAGS= -std=gnu11 -Wall -Wextra $(IDIR)
 
 LDIR = -L/usr/local/lib  -L/usr/lib/x86_64-linux-gnu
-LIBS = -lusb-1.0 -lpthread -Wl,-rpath -Wl,/usr/local/lib -lhidapi-libusb #with HID
+LIBS = -lusb-1.0 -lpthread -Wl,-rpath -Wl,/usr/local/lib #with HID
 
 TARGET = G203colorshifter
 MMO_TARGET = G203MMO
